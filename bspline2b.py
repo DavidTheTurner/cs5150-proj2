@@ -1,13 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from typing import Iterable
 from drawbezier_dc import drawbezier_dc
 
 """
 To display a cubic B-sline given by de Boor control points
-d_0, ..., d_N  
+d_0, ..., d_N
 
-Input points: left click for the d's then press enter (or return, or right click)  
+Input points: left click for the d's then press enter (or return, or right click)
 
 Performs a loop from 1 to N - 2 to compute the Bezier
 points using de Casteljau subdivision
@@ -18,7 +17,14 @@ of all the control points of the Bezier segments stored in
 Bx(N-2,4) and By(N-2,4)
 """
 
-def bspline2b(dx: np.ndarray|list[float], dy: np.ndarray|list[float], N: int, nn: int, drawb: bool) -> tuple[np.ndarray, np.ndarray]:
+
+def bspline2b(
+    dx: np.ndarray | list[float],
+    dy: np.ndarray | list[float],
+    N: int,
+    nn: int,
+    drawb: bool
+) -> tuple[np.ndarray, np.ndarray]:
     # Works if N >= 4
 
     Bx = np.zeros(0)
