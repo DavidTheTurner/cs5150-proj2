@@ -6,6 +6,8 @@ To input data points from a window on the screen
 Left click on mouse to input points
 middle, right or return to end input
 """
+
+
 def get_points() -> tuple[np.ndarray, np.ndarray]:
     plt.cla()
     plt.ion()
