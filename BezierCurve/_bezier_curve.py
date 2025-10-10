@@ -34,3 +34,11 @@ class BezierCurve:
             [i for lpoly in last_iteration for i in [lpoly.ud, lpoly.ld]]
         )
         return results
+
+    def make_list(self) -> np.ndarray:
+        lpoly: np.ndarray = self.get_output()
+        new_poly: list = [poly for poly in lpoly]
+        new_poly[1:] = [p[:, 1:] for p in new_poly[1:]]
+        results: np.ndarray = np.concat(new_poly, axis=1)
+        print(results)
+        return results
