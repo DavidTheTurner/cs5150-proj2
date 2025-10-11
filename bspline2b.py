@@ -38,7 +38,7 @@ def bspline2b(
     plt.figure()
     dim_data = 2
     B = np.zeros((dim_data, 4))
-    plt.plot(dx, dy, 'or-')
+    plt.plot(dx, dy, 'or-', markerfacecolor="none")
     plt.ion()
     for i in range(N-2):
         B[0, :] = Bx[i, :]
