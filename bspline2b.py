@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from BezierCurve._deboor_phase import DeboorControlPoints
 from drawbezier_dc import drawbezier_dc
-from BezierCurve import BezierCurve
 
 """
 To display a cubic B-sline given by de Boor control points
@@ -31,9 +31,8 @@ def bspline2b(
     Bx = np.zeros(0)
     By = np.zeros(0)
     # === COMPUTE Bx AND By HERE ===
-    bezier_curve: BezierCurve = BezierCurve(np.stack((dx, dy)))
-    results: np.ndarray = bezier_curve.sub_div(nn).make_list()
-    print(results)
+    deboor_control_points: DeboorControlPoints = DeboorControlPoints(np.stack((dx, dy)))
+    (Bx, By) = deboor_control_points.points
 
     # nn is the subdivision level
     plt.figure()
