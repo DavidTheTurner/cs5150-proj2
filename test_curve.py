@@ -21,7 +21,7 @@ def d_control_points() -> np.ndarray:
     "depth",
     [(1), (2), (3),]
 )
-def test_behavior_has_not_changed(d_control_points: np.ndarray, depth: int):
+def test_curve_behavior_has_not_changed(d_control_points: np.ndarray, depth: int):
 
     bezier_curve: BezierCurve = BezierCurve(d_control_points)
     results: np.ndarray = bezier_curve.sub_div(depth).make_list()
