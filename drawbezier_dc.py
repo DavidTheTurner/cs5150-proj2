@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 import numpy as np
 
 from BezierCurve import BezierCurve
@@ -15,11 +16,11 @@ def drawbezier_dc(B: np.ndarray, nn: int, drawb: bool):
     # nn is the subdivision level
 
     # === Draw curve here === #
+    # Plot the curve segment as a random color
     curve: BezierCurve = BezierCurve(B)
     results: np.ndarray = curve.sub_div(nn).make_list()
-    print(results)
+    plt.plot(results[0], results[1])
 
-    # Plot the curve segment as a random color
     if drawb:
         # Plot bezier points and segments as red +
         pass
