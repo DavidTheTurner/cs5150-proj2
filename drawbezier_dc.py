@@ -23,9 +23,9 @@ def drawbezier_dc(B: np.ndarray, nn: int, drawb: bool):
 
     if drawb:
         # Plot bezier points and segments as red +
-        pass
+        plt.plot(B[0], B[1], marker="+", color="red")
     else:
         # Plot bezier points as red +
-        pass
+        plt.scatter(B[0], B[1], marker="+", color="red")
 
     return
