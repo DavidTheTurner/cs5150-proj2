@@ -1,4 +1,5 @@
 
+from itertools import chain
 import numpy as np
 from ._phase import Phase
 
@@ -19,11 +20,11 @@ class BezierCurve:
 
             # Split ud and ld so the phases stay the same size as the input
             # cpoly
-            new_iteration: list[Phase] = [
-                phase
+            new_iteration: list[Phase] = list(chain.from_iterable([
+                (Phase(lpoly.ud), Phase(lpoly.ld))
                 for lpoly in last_iteration
-                for phase in [Phase(lpoly.ud), Phase(lpoly.ld)]
-            ]
+            ]))
+
             self.phases.append(new_iteration)
 
         return self
