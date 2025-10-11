@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     filename="deboor.log",
-    level=logging.DEBUG
+    level=logging.INFO
 )
 
 
@@ -17,8 +17,8 @@ def truncate_extra_decimals(array: np.ndarray, decimals: int) -> np.ndarray:
     return np.trunc(array) + truncated_decimals
 
 
-def segment_c_1(deboor_points: np.ndarray) -> np.ndarray:
-    logger.debug(f"Segment C1 w/ Points: {deboor_points}")
+def segment_c_1(deboor_points: np.ndarray, n: int) -> np.ndarray:
+    logger.info(f"Segment C1 w/ Points: {deboor_points}")
     b: np.ndarray = np.zeros(4)
     b[0] = deboor_points[0]
     b[1] = deboor_points[1]
@@ -29,7 +29,7 @@ def segment_c_1(deboor_points: np.ndarray) -> np.ndarray:
 
 
 def segment_c_2(deboor_points: np.ndarray) -> np.ndarray:
-    logger.debug(f"Segment C2 w/ Points: {deboor_points}")
+    logger.info(f"Segment C2 w/ Points: {deboor_points}")
     b: np.ndarray = np.zeros(4)
     b[0] = (1/4) * deboor_points[1] + (7/12) * deboor_points[2] + (1/6) * deboor_points[3]
     b[1] = (2/3) * deboor_points[2] + (1/3) * deboor_points[3]
@@ -40,7 +40,7 @@ def segment_c_2(deboor_points: np.ndarray) -> np.ndarray:
 
 
 def segment_general(deboor_points: np.ndarray, i: int) -> np.ndarray:
-    logger.debug(f"Segment CGeneral w/ i: {i}\nPoints: {deboor_points}")
+    logger.info(f"Segment CGeneral w/ i: {i}\nPoints: {deboor_points}")
     b: np.ndarray = np.zeros(4)
     b[0] = (1/6) * deboor_points[i - 1] + (4/6) * deboor_points[i] + (1/6) * deboor_points[i + 1]
     b[1] = (2/3) * deboor_points[i] + (1/3) * deboor_points[i + 1]
@@ -51,7 +51,7 @@ def segment_general(deboor_points: np.ndarray, i: int) -> np.ndarray:
 
 
 def segment_n_sub_3(deboor_points: np.ndarray, n: int) -> np.ndarray:
-    logger.debug(f"Segment N-3 w/ N: {n}\nPoints: {deboor_points}")
+    logger.info(f"Segment N-3 w/ N: {n}\nPoints: {deboor_points}")
     b: np.ndarray = np.zeros(4)
     b[0] = (1/6) * deboor_points[n - 4] + (4/6) * deboor_points[n - 3] + (1/6) * deboor_points[n - 2]
     b[1] = (2/3) * deboor_points[n - 3] + (1/3) * deboor_points[n - 2]
@@ -62,12 +62,45 @@ def segment_n_sub_3(deboor_points: np.ndarray, n: int) -> np.ndarray:
 
 
 def segment_n_sub_2(deboor_points: np.ndarray, n: int) -> np.ndarray:
-    logger.debug(f"Segment N-2 w/ N: {n}\nPoints: {deboor_points}")
+    logger.info(f"Segment N-2 w/ N: {n}\nPoints: {deboor_points}")
     b: np.ndarray = np.zeros(4)
     b[0] = (1/6) * deboor_points[n - 3] + (7 / 12) * deboor_points[n - 2] + (1/4) * deboor_points[n - 1]
     b[1] = (1/2) * deboor_points[n - 2] + (1/2) * deboor_points[n - 1]
     b[2] = deboor_points[n - 1]
     b[3] = deboor_points[n]
+
+    return b
+
+
+def segment_n_4_c_1(deboor_points: np.ndarray) -> np.ndarray:
+    logger.info(f"Segment N = 4, C1 w/ Points: {deboor_points}")
+    b: np.ndarray = np.zeros(4)
+    b[0] = deboor_points[0]
+    b[1] = deboor_points[1]
+    b[2] = (1/2) * deboor_points[1] + (1/2) * deboor_points[2]
+    b[3] = (1/4) * deboor_points[1] + (1/2) * deboor_points[2] + (1/4) * deboor_points[3]
+
+    return b
+
+
+def segment_n_4_n_sub_2(deboor_points: np.ndarray) -> np.ndarray:
+    logger.info(f"Segment N = 4, N-2 w/ N: 3\nPoints: {deboor_points}")
+    b: np.ndarray = np.zeros(4)
+    b[0] = (1/4) * deboor_points[1] + (1/2) * deboor_points[2] + (1/4) * deboor_points[3]
+    b[1] = (1/2) * deboor_points[2] + (1/2) * deboor_points[3]
+    b[2] = deboor_points[3]
+    b[3] = deboor_points[4]
+
+    return b
+
+
+def segment_n_5_c_2(deboor_points: np.ndarray) -> np.ndarray:
+    logger.info(f"Segment N = 4, C1 w/ Points: {deboor_points}")
+    b: np.ndarray = np.zeros(4)
+    b[0] = (1/4) * deboor_points[1] + (7/12) * deboor_points[2] + (1/6) * deboor_points[3]
+    b[1] = (2/3) * deboor_points[2] + (1/3) * deboor_points[3]
+    b[2] = (1/3) * deboor_points[2] + (2/3) * deboor_points[3]
+    b[3] = (1/6) * deboor_points[2] + (7/12) * deboor_points[3] + (1/4) * deboor_points[4]
 
     return b
 
@@ -78,14 +111,28 @@ def get_segment_calculation(points: np.ndarray, segment_index: int, n: int) -> n
     the points.
     """
 
+    if n == 4:
+        if segment_index == 1:
+            return segment_n_4_c_1(points)
+        else:
+            return segment_n_4_n_sub_2(points)
+
+    if n == 5:
+        if segment_index == 1:
+            return segment_c_1(points, n)
+        elif segment_index == 2:
+            return segment_n_5_c_2(points)
+        else:
+            return segment_n_sub_2(points, n)
+
     if segment_index == 1:
-        return segment_c_1(points)
-    elif segment_index == n - 3:
-        return segment_n_sub_3(points, n)
+        return segment_c_1(points, n)
     elif segment_index == n - 2:
         return segment_n_sub_2(points, n)
     elif segment_index == 2:
         return segment_c_2(points)
+    elif segment_index == n - 3:
+        return segment_n_sub_3(points, n)
 
     return segment_general(points, segment_index)
 
