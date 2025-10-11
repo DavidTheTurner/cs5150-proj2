@@ -8,16 +8,7 @@ logging.basicConfig(
 )
 
 
-def truncate_extra_decimals(array: np.ndarray, decimals: int) -> np.ndarray:
-    decimals_array: np.ndarray = array - np.trunc(array)
-
-    decimal_offset: int = 10 ** decimals
-    truncated_decimals: np.ndarray = np.trunc(decimals_array * decimal_offset) / decimal_offset
-
-    return np.trunc(array) + truncated_decimals
-
-
-def segment_c_1(deboor_points: np.ndarray, n: int) -> np.ndarray:
+def segment_c_1(deboor_points: np.ndarray) -> np.ndarray:
     logger.info(f"Segment C1 w/ Points: {deboor_points}")
     b: np.ndarray = np.zeros(4)
     b[0] = deboor_points[0]
@@ -119,14 +110,14 @@ def get_segment_calculation(points: np.ndarray, segment_index: int, n: int) -> n
 
     if n == 5:
         if segment_index == 1:
-            return segment_c_1(points, n)
+            return segment_c_1(points)
         elif segment_index == 2:
             return segment_n_5_c_2(points)
         else:
             return segment_n_sub_2(points, n)
 
     if segment_index == 1:
-        return segment_c_1(points, n)
+        return segment_c_1(points)
     elif segment_index == n - 2:
         return segment_n_sub_2(points, n)
     elif segment_index == 2:
