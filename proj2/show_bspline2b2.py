@@ -1,5 +1,5 @@
 import numpy as np
-from bspline2b import bspline2b
+from .bspline2b import bspline2b
 import matplotlib.pyplot as plt
 
 

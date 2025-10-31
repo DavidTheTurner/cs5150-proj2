@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from BezierCurve._deboor_phase import DeboorControlPoints
-from drawbezier_dc import drawbezier_dc
+from DeboorPoints import DeboorControlPoints
+from .drawbezier_dc import drawbezier_dc
 
 """
 To display a cubic B-sline given by de Boor control points

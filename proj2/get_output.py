@@ -2,8 +2,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Iterable
-from bspline2b import bspline2b
-from get_points import get_points
+from .bspline2b import bspline2b
+from .get_points import get_points
 
 
 def write_table(out: str, headers: list[str], dat: list[Iterable]):
