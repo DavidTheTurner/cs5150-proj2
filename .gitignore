@@ -4,3 +4,10 @@ __pycache__
 output*
 *.log
 .pytest_cache
+
+# Latex intermediate files
+*.aux
+*.fls
+*.pdf
+*.gz
+*.fdb_latexmk
