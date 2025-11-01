@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+
+\setlength{\topmargin}{-.5in}
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\textwidth}{6.5truein}
+\setlength{\textheight}{8.5truein}
+
+\begin{document}
+    \[
+        C(t) = (1 - t)^3b_0 + 3(1 - t)^2tb_1 + 3(1 - t)t^2b_2 + t^3b_3
+    \]
+    \begin{align*}
+        C'(t) & = 3(1 - t)^2(-1)b_0 + 3(2(1 - t)(-1)t + (1 - t)^2)b_1 + 3((-1)t^2 + 2(1 - t)t)b_2 + 3t^2b_3
+        \\ & =
+        -3(1 - t)^2b_0 + 3(-2(1 - t)t + (1 - t)^2)b_1 + 3(-t^2 + 2(1 - t)t)b_2 + 3t^2b_3
+        \\ & =
+        -3(1 - t)^2b_0 - 6(1 - t)tb_1 + 3(1 - t)^2b_1 - 3t^2b_2 + 6(1 - t)tb_2 + 3t^2b_3
+    \end{align*}
+    \begin{align*}
+        C''(t) & = -3(2(1 - t)(-1))b_0 - 6((1-t) + (-1)t)b_1 + 3(2(1 - t)(-1))b_1 - 6tb_2 +6((-1)t + (1 - t))b_2 + 6tb_3
+        \\ & =
+        6(1 - t)b_0 - 6(1 - t)b_1 + 6tb_1 - 6(1 - t)b_1 - 6tb_2 - 6tb_2 + 6(1 - t)b_2 + 6tb_3
+        \\ & =
+        6b_0 - 6tb_0 - 6b_1 + 6tb_1 + 6tb_1 - 6b_1 + 6tb_1 - 12tb_2 + 6b_2 - 6tb_2 + 6tb_3
+        \\ & =
+        6b_0 - 6tb_0 - 12b_1 + 18tb_1 - 18tb_2 + 6b_2 + 6tb_3
+    \end{align*}
+\end{document}
