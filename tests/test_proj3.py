@@ -4,7 +4,7 @@ import numpy as np
 from CurveInterpolation.curve_interpolation import (
     create_coefficients_matrix, create_constants_matrix, solve_for_d_matrix
 )
-from py_student_code3.interpatxy import interpatxy
+from project3.interpatxy import interpatxy
 from tests.conftest import PROJ3_OUTPUT_DIR
 
 
