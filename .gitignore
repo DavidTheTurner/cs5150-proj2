@@ -1,9 +1,17 @@
+# Mac files that don't need to be in git
 .DS_Store
+
+# Python generated files that shouldn't be comitted
 .venv
 __pycache__
+.pytest_cache
+
+# Output/log files
 output*
 *.log
-.pytest_cache
+
+# Test outputs
+tests/approval_outputs
 
 # Latex intermediate files
 *.aux
