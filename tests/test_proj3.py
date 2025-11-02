@@ -1,8 +1,12 @@
+from pathlib import Path
+from matplotlib import pyplot as plt
 import numpy as np
 from CurveInterpolation.curve_interpolation import (
     create_coefficients_matrix, create_coefficients_matrix2, create_constants_matrix, create_derrived_constants_matrix,
     solve_for_d_matrix
 )
+from py_student_code3.interpatxy import interpatxy
+from tests.conftest import PROJ3_OUTPUT_DIR
 
 
 class TestCreateCoefficientsMatrix:
@@ -241,3 +245,30 @@ class TestSolveForDMatrix:
         ])
 
         assert np.allclose(result, expected)
+
+
+class TestOutput:
+
+    def test_output(self):
+        """
+        We are given 1 example of a correct output. Figure 3, at the bottom of the homework 3 pdf,
+        has an image of a curve using the following points. We execute our interpatxy method
+        with these points and save the image to tests/approval_outputs/proj3/test_img.png
+        so we can compare it to the example.
+        """
+
+        x_6: np.ndarray = np.array([
+            2.7310, 1.3599, 1.1662, 1.9709, 4.7876, 7.0827, 6.2630, 4.2809, 3.9232, 4.9367, 8.3048, 9.0052, 7.6639
+        ])
+        y_6: np.ndarray = np.array([
+            1.1106, 2.4716, 5.3639, 7.3677, 8.3129, 7.6134, 5.3072, 5.0614, 2.8875, 1.0539, 0.8648, 2.5095, 3.7760
+        ])
+
+        interpatxy(
+            x=x_6,
+            y=y_6
+        )
+
+        img_output: Path = PROJ3_OUTPUT_DIR / "test_img.png"
+        plt.pause(0.5)
+        plt.savefig(img_output)
