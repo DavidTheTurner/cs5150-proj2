@@ -68,6 +68,7 @@ def create_constants_matrix(points: np.ndarray, d_0: float, d_n: float) -> np.nd
 
 def create_derrived_constants_matrix(points: np.ndarray) -> np.ndarray:
     n: int = points.shape[0] - 1
+
     assert points.shape[1] == 1, "Points must be columnar."
     assert n >= 3, "Only N >= 3 is supported."
 
@@ -85,6 +86,12 @@ def create_derrived_constants_matrix(points: np.ndarray) -> np.ndarray:
 
 
 def solve_for_d_matrix(points: np.ndarray) -> np.ndarray:
+
+    # Convert points to columnar if they aren't already
+    if points.ndim == 1:
+        length: int = points.shape[0]
+        points = points.reshape((length, 1))
+
     n: int = points.shape[0] - 1
 
     coefficients_matrix: np.ndarray = create_coefficients_matrix2(n)
