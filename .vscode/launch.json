@@ -5,11 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Output",
+            "name": "Project 3",
             "type": "debugpy",
             "request": "launch",
-            "program": "./get_output.py",
-            "console": "integratedTerminal"
-        }
+            "module": "py_student_code3.get_output"
+        },
     ]
 }
