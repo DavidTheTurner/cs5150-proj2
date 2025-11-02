@@ -119,4 +119,4 @@ def solve_for_d_matrix(points: np.ndarray) -> np.ndarray:
     complete_d_matrix[-1, 0] = d_n_plus_1
 
     assert complete_d_matrix.shape[0] == n + 3
-    return complete_d_matrix
+    return complete_d_matrix.ravel()
