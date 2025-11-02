@@ -82,3 +82,34 @@ def create_derrived_constants_matrix(points: np.ndarray) -> np.ndarray:
     constants_matrix[n - 2, 0] = 6 * points[n - 1, 0] - x_n
 
     return constants_matrix
+
+
+def solve_for_d_matrix(points: np.ndarray) -> np.ndarray:
+    n: int = points.shape[0] - 1
+
+    coefficients_matrix: np.ndarray = create_coefficients_matrix2(n)
+    constants_matrix: np.ndarray = create_derrived_constants_matrix(points)
+
+    partial_d_matrix: np.ndarray = np.linalg.solve(coefficients_matrix, constants_matrix)
+
+    d_1: float = partial_d_matrix[0, 0]
+    x_0: float = points[0, 0]
+    d_n_minus_1: float = partial_d_matrix[-1, 0]
+    x_n: float = points[-1, 0]
+
+    d_minus_1: float = x_0
+    d_0: float = (2/3) * x_0 + (1/3) * d_1
+    d_n: float = (1/3) * d_n_minus_1 + (2/3) * x_n
+    d_n_plus_1: float = x_n
+
+    complete_d_matrix: np.ndarray = np.zeros((n + 3, 1))
+    complete_d_matrix[0, 0] = d_minus_1
+    complete_d_matrix[1, 0] = d_0
+
+    complete_d_matrix[2:-2] = partial_d_matrix
+
+    complete_d_matrix[-2, 0] = d_n
+    complete_d_matrix[-1, 0] = d_n_plus_1
+
+    assert complete_d_matrix.shape[0] == n + 3
+    return complete_d_matrix
