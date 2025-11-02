@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from bspline2b import bspline2b
+from .bspline2b import bspline2b
 
 
 def interpatxy(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:

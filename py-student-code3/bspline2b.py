@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from drawbezier_dc import drawbezier_dc
+
+from .drawbezier_dc import drawbezier_dc
 
 """
 To display a cubic B-sline given by de Boor control points

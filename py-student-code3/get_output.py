@@ -1,11 +1,14 @@
-import numpy as np
 import os
-from interpatxy import interpatxy
-from typing import Iterable
-import matplotlib.pyplot as plt
-from get_points import get_points
 
-# Project 2
+from typing import Iterable
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+from .interpatxy import interpatxy
+from .get_points import get_points
+
+# Project 3
 # Python rewrite (SRM)
 
 if not os.path.exists("output"):
