@@ -218,14 +218,7 @@ class TestSolveForDMatrix:
 
         result: np.ndarray = solve_for_d_matrix(points)
 
-        expected: np.ndarray = np.array([
-            [1.],
-            [1.33333333],
-            [2.],
-            [3.],
-            [3.66666667],
-            [4.],
-        ])
+        expected: np.ndarray = np.array([1., 1.33333333, 2., 3., 3.66666667, 4.])
 
         assert np.allclose(result, expected)
 
@@ -234,15 +227,7 @@ class TestSolveForDMatrix:
 
         result: np.ndarray = solve_for_d_matrix(points)
 
-        expected: np.ndarray = np.array([
-            [1],
-            [1.33333333],
-            [2],
-            [3],
-            [4],
-            [4.66666667],
-            [5]
-        ])
+        expected: np.ndarray = np.array([1, 1.33333333, 2, 3, 4, 4.66666667, 5])
 
         assert np.allclose(result, expected)
 
