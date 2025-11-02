@@ -14,7 +14,7 @@ pip install -r requirements.txt
 For Project 3, simply run the `run_project3` shell script
 
 ```terminal
-./run_proj3
+./run_project3
 ```
 
 This script will run the code in `project3`, which has been provided by Gallier and updated to include our
