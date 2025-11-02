@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 -m py-student-code3.get_output
