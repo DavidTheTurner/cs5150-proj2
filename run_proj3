@@ -1,3 +1,8 @@
 #!/bin/bash
 
-python3 -m py-student-code3.get_output
+python3 -m py_student_code3.get_output
+latexmk -pdf CurveInterpolation/curve_interpolation.tex
+latexmk -c CurveInterpolation/curve_interpolation.tex
+mv curve_interpolation.pdf ./output/report/report.pdf
+
+zip -r output output --exclude **/__MACOSX
