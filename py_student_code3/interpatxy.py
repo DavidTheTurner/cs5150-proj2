@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from .bspline2b import bspline2b
 
 from CurveInterpolation import solve_for_d_matrix
-from DeboorPoints import DeboorControlPoints
 
 
 def interpatxy(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -30,14 +29,8 @@ def interpatxy(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray, np
     # === Compute dx, dy, Bx, By here === #
 
     # Calculate the D matrix
-    d_x: np.ndarray = solve_for_d_matrix(x)
-    d_y: np.ndarray = solve_for_d_matrix(y)
-
-    # Calculate DeBoor points
-    deboor_input: np.ndarray = np.stack(d_x, d_y)
-    deboor_control_points: DeboorControlPoints = DeboorControlPoints(deboor_input)
-    deboor_output: np.ndarray = deboor_control_points.points
-    dx, dy = np.unstack(deboor_output)
+    dx: np.ndarray = solve_for_d_matrix(x)
+    dy: np.ndarray = solve_for_d_matrix(y)
 
     # Plots the spline
     Nx = len(dx)-1

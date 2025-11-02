@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from DeboorPoints import DeboorControlPoints
+
 from .drawbezier_dc import drawbezier_dc
 
 """
@@ -31,7 +33,8 @@ def bspline2b(
     Bx = np.zeros(0)
     By = np.zeros(0)
     # === COMPUTE Bx AND By HERE ===
-    raise Exception("Implement me")
+    deboor_control_points: DeboorControlPoints = DeboorControlPoints(np.stack((dx, dy)))
+    (Bx, By) = deboor_control_points.points
 
     # nn is the subdivision level
     plt.figure()
