@@ -24,3 +24,19 @@ def create_coefficients_matrix(n: int) -> np.ndarray:
         coefficients_matrix = coefficients_matrix + above_diagonal + below_diagonal
 
     return coefficients_matrix
+
+
+def create_constants_matrix(points: np.ndarray, d_0: float, d_n: float) -> np.ndarray:
+    n: int = points.shape[0] - 1
+    assert points.shape[1] == 1, "Points must be columnar."
+    assert n >= 3, "Only N >= 3 is supported."
+
+    constants_matrix: np.ndarray = np.zeros((n - 1, 1))
+    constants_matrix[0, 0] = 6 * points[1, 0] - (3/2) * d_0
+
+    if n > 3:
+        constants_matrix[1:n - 2, 0] = 6 * points[2:n - 1, 0]
+
+    constants_matrix[n - 2, 0] = 6 * points[n - 1, 0] - (3/2) * d_n
+
+    return constants_matrix
