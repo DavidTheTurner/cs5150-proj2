@@ -1,6 +1,7 @@
 import numpy as np
 from CurveInterpolation.curve_interpolation import (
-    create_coefficients_matrix, create_coefficients_matrix2, create_constants_matrix, create_derrived_constants_matrix
+    create_coefficients_matrix, create_coefficients_matrix2, create_constants_matrix, create_derrived_constants_matrix,
+    solve_for_d_matrix
 )
 
 
@@ -204,3 +205,39 @@ class TestDerrivedCreateConstantMatrix:
         expected: np.ndarray = np.array([11, 18, 24, 24]).reshape((4, 1))
 
         assert np.array_equal(result, expected)
+
+
+class TestSolveForDMatrix:
+
+    def test_n_3(self):
+        points: np.ndarray = np.array([1, 2, 3, 4]).reshape((4, 1))
+
+        result: np.ndarray = solve_for_d_matrix(points)
+
+        expected: np.ndarray = np.array([
+            [1.],
+            [1.33333333],
+            [2.],
+            [3.],
+            [3.66666667],
+            [4.],
+        ])
+
+        assert np.allclose(result, expected)
+
+    def test_n_4(self):
+        points: np.ndarray = np.array([1, 2, 3, 4, 5]).reshape((5, 1))
+
+        result: np.ndarray = solve_for_d_matrix(points)
+
+        expected: np.ndarray = np.array([
+            [1],
+            [1.33333333],
+            [2],
+            [3],
+            [4],
+            [4.66666667],
+            [5]
+        ])
+
+        assert np.allclose(result, expected)
